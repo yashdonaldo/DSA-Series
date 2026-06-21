@@ -5,7 +5,8 @@ public class ArrayList {
     public static void main(String[] args) {
 
         // bubbleSort();
-        selectionSortBySwaping();
+        // selectionSortBySwaping();
+        insertionSort();
     }
 
     // find smallest element in array
@@ -93,4 +94,30 @@ public class ArrayList {
            System.out.println(m);
        }
     }
+
+    // Insertion Sort algorithm
+    public static void insertionSort() {
+        int[] arr = {8, 4, 6, 7, 9, 3, 2, 1};
+
+        for (int i = 1; i < arr.length; i++) {
+            int initialStart = i;
+            int currentValue = arr[initialStart];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > currentValue) {
+                arr[j+1]  = arr[j];
+                initialStart = j;
+                j--;
+            }
+            arr[initialStart] = currentValue;
+            
+        }
+        for (Object c : arr) {
+            System.out.println(c);
+        }
+
+    }
+
+
+
+
 }
