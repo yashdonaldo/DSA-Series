@@ -1,12 +1,16 @@
-// find lowest element from array 
-
+// find lowest element from array
 public class ArrayList {
 
     public static void main(String[] args) {
 
         // bubbleSort();
         // selectionSortBySwaping();
-        insertionSort();
+        // insertionSort();
+        int[] arr = {9, 5, 6, 3, 8, 7, 2, 1};
+        quickSort(arr, 0, arr.length - 1);
+        for (Object aObject : arr) {
+            System.out.println(aObject);
+        }
     }
 
     // find smallest element in array
@@ -51,26 +55,25 @@ public class ArrayList {
     public static void selectionSortbyShifting() {
         int[] arr = {8, 3, 5, 6, 9, 12, 4, 34, 2, 6, 1};
         int[] min_arr = new int[arr.length];
-        for (int i = 0; i < min_arr.length -1; i++) {
+        for (int i = 0; i < min_arr.length - 1; i++) {
             int min_index = i;
 
-            for (int j = i+1; j < min_arr.length; j++) {
-                if(arr[min_index] > arr[j]){
+            for (int j = i + 1; j < min_arr.length; j++) {
+                if (arr[min_index] > arr[j]) {
                     min_index = j;
                 }
             }
             int min_value = arr[min_index];
 
             for (int k = min_index; k > i; k--) {
-                arr[k] = arr[k-1];
+                arr[k] = arr[k - 1];
             }
             arr[i] = min_value;
-       }
+        }
 
-
-       for (int m : arr) {
-           System.out.println(m);
-       }
+        for (int m : arr) {
+            System.out.println(m);
+        }
     }
 
     // Selection sort algorithm by swaping
@@ -81,8 +84,8 @@ public class ArrayList {
         for (int i = 0; i < n_arr.length - 1; i++) {
             int minIndex = i;
 
-            for (int j = i+1; j < n_arr.length; j++){
-                if(arr[j] < arr[minIndex]){
+            for (int j = i + 1; j < n_arr.length; j++) {
+                if (arr[j] < arr[minIndex]) {
                     int temp = arr[j];
                     arr[j] = arr[minIndex];
                     arr[minIndex] = temp;
@@ -90,9 +93,9 @@ public class ArrayList {
             }
         }
 
-         for (int m : arr) {
-           System.out.println(m);
-       }
+        for (int m : arr) {
+            System.out.println(m);
+        }
     }
 
     // Insertion Sort algorithm
@@ -104,12 +107,12 @@ public class ArrayList {
             int currentValue = arr[initialStart];
             int j = i - 1;
             while (j >= 0 && arr[j] > currentValue) {
-                arr[j+1]  = arr[j];
+                arr[j + 1] = arr[j];
                 initialStart = j;
                 j--;
             }
             arr[initialStart] = currentValue;
-            
+
         }
         for (Object c : arr) {
             System.out.println(c);
@@ -117,7 +120,33 @@ public class ArrayList {
 
     }
 
+    // Quick Sort algorithm
+    public static void quickSort(int[] arr, int start, int last){
+        if(start < last){
+            int pivotElement = pivotion(arr, start, last);
+            quickSort(arr, pivotElement +1, last);
+            quickSort(arr, start, pivotElement -1);
+        }
+    }
 
+    public static int pivotion(int[] arr, int start, int last){
+        int pivot = arr[last];
+        int i = start -1;
 
+        for (int j = start; j < last; j++) {
+            if(arr[j] <= pivot){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[i + 1];
+        arr[i +1] = arr[last];
+        arr[last] = temp;
+
+        return i +1;
+    }
 
 }
