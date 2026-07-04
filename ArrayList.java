@@ -6,11 +6,14 @@ public class ArrayList {
         // bubbleSort();
         // selectionSortBySwaping();
         // insertionSort();
-        int[] arr = {9, 5, 6, 3, 8, 7, 2, 1};
-        quickSort(arr, 0, arr.length - 1);
-        for (Object aObject : arr) {
-            System.out.println(aObject);
-        }
+        // int[] arr = {9, 5, 6, 3, 8, 7, 2, 1};
+        // quickSort(arr, 0, arr.length - 1);
+        // for (Object aObject : arr) {
+        //     System.out.println(aObject);
+        // }
+
+        countingSort();
+        
     }
 
     // find smallest element in array
@@ -149,4 +152,34 @@ public class ArrayList {
         return i +1;
     }
 
+
+    // Counting Sort
+    public static void countingSort() {
+         int[] arr = {4, 6, 3, 6, 4, 1, 5, 3, 4};
+        int max = arr[0];
+
+        // find max value of arr
+        for (int i = 0; i < arr.length; i++) {
+            if(max < arr[i]){
+                max = arr[i];
+            }
+        }
+        // System.out.println("max value "+max);
+        
+        int[] n_arr = new int[max + 1];
+        for (int nar : arr) {
+            n_arr[nar] = n_arr[nar] + 1;
+        }
+        int index = 0;
+        for (int i = 0; i <= max; i++) {
+            while (n_arr[i]>0) { 
+                arr[index++] = i;
+                n_arr[i]--;
+            }
+        }
+
+       for (Object sortedArr : arr) {
+            System.out.println(sortedArr);
+        }
+    }
 }
