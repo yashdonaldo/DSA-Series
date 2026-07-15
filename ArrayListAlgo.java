@@ -1,5 +1,5 @@
-// find lowest element from array
-public class ArrayList {
+
+public class ArrayListAlgo {
 
     public static void main(String[] args) {
 
@@ -11,9 +11,9 @@ public class ArrayList {
         // for (Object aObject : arr) {
         //     System.out.println(aObject);
         // }
+        // countingSort();
+        redixSort();
 
-        countingSort();
-        
     }
 
     // find smallest element in array
@@ -124,20 +124,20 @@ public class ArrayList {
     }
 
     // Quick Sort algorithm
-    public static void quickSort(int[] arr, int start, int last){
-        if(start < last){
+    public static void quickSort(int[] arr, int start, int last) {
+        if (start < last) {
             int pivotElement = pivotion(arr, start, last);
-            quickSort(arr, pivotElement +1, last);
-            quickSort(arr, start, pivotElement -1);
+            quickSort(arr, pivotElement + 1, last);
+            quickSort(arr, start, pivotElement - 1);
         }
     }
 
-    public static int pivotion(int[] arr, int start, int last){
+    public static int pivotion(int[] arr, int start, int last) {
         int pivot = arr[last];
-        int i = start -1;
+        int i = start - 1;
 
         for (int j = start; j < last; j++) {
-            if(arr[j] <= pivot){
+            if (arr[j] <= pivot) {
                 i++;
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -146,40 +146,80 @@ public class ArrayList {
         }
 
         int temp = arr[i + 1];
-        arr[i +1] = arr[last];
+        arr[i + 1] = arr[last];
         arr[last] = temp;
 
-        return i +1;
+        return i + 1;
     }
-
 
     // Counting Sort
     public static void countingSort() {
-         int[] arr = {4, 6, 3, 6, 4, 1, 5, 3, 4};
+        int[] arr = {4, 6, 3, 6, 4, 1, 5, 3, 4};
         int max = arr[0];
 
         // find max value of arr
         for (int i = 0; i < arr.length; i++) {
-            if(max < arr[i]){
+            if (max < arr[i]) {
                 max = arr[i];
             }
         }
         // System.out.println("max value "+max);
-        
+
         int[] n_arr = new int[max + 1];
+
         for (int nar : arr) {
             n_arr[nar] = n_arr[nar] + 1;
         }
         int index = 0;
         for (int i = 0; i <= max; i++) {
-            while (n_arr[i]>0) { 
+            while (n_arr[i] > 0) {
                 arr[index++] = i;
                 n_arr[i]--;
             }
         }
 
-       for (Object sortedArr : arr) {
+        for (Object sortedArr : arr) {
             System.out.println(sortedArr);
         }
     }
+
+    // Redix sort
+    public static void redixSort() {
+        int[] arr = {35, 56, 34, 67, 23, 18, 15, 89, 90, 56};
+        int[][] redixArr = new int[10][arr.length];
+        int[] counts = new int[10];
+        int max = arr[0];
+        int exp = 1;
+
+        // find max value of arr
+        for (int i = 0; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+        }
+
+        while (max / exp > 0) { 
+            for (int val : arr) {
+                int redixIndex = (val / exp) % 10;
+                redixArr[redixIndex][counts[redixIndex]] = val;
+                counts[redixIndex]++;
+            }
+            int pos = 0;
+            for (int i=0; i<10; i++) {
+                for (int j = 0; j < counts[i]; j++) {
+                    arr[pos] = redixArr[i][j];
+                    pos++;
+                }
+                counts[i] = 0;
+            }
+            exp *= 10;
+        }
+
+
+        for (int sval : arr) {
+            System.out.println("sorted value" + sval);
+        }
+
+    }
+
 }
